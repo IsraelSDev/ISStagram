@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IUsuario } from 'src/app/shared/models/usuario.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,7 +14,9 @@ export class CadastroComponent implements OnInit {
 
   cadastroForm: FormGroup;
 
-  constructor() {
+  constructor(
+    private authService: AuthService
+  ) {
     this.cadastroForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       nomeCompleto: new FormControl('', [Validators.required,]),
@@ -25,7 +29,14 @@ export class CadastroComponent implements OnInit {
   }
 
   submitFormCadastro() {
-    console.log(this.cadastroForm.value);
+    const usuario: IUsuario = {
+      email: this.cadastroForm.value.email,
+      nomeCompleto: this.cadastroForm.value.nomeCompleto,
+      nomeUsuario: this.cadastroForm.value.nomeUsuario,
+      senha: this.cadastroForm.value.senha
+    }
+
+    this.authService.cadastrarUsuario(usuario);
   }
 
   irLogar() {

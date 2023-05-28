@@ -1,3 +1,5 @@
+import { IUsuarioLogin } from './../../../shared/models/usuario.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
@@ -13,9 +15,11 @@ export class LoginComponent implements OnInit {
 
   formLogin: FormGroup;
 
-  constructor() {
+  constructor(
+    private auth: AuthService
+  ) {
     this.formLogin = new FormGroup({
-      login: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
       senha: new FormControl('', [Validators.required])
     })
   }
@@ -28,7 +32,11 @@ export class LoginComponent implements OnInit {
   }
 
   submitLogin() {
-    console.log(this.formLogin.value);
+    const user: IUsuarioLogin = {
+      email: this.formLogin.value.email,
+      senha: this.formLogin.value.senha
+    }
+    this.auth.logarUsuario(user);
   }
 
 }
