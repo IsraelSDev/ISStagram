@@ -1,14 +1,14 @@
-<div class="card" style="width: 20rem;">
+<div class="card shadow" style="width: 20rem;">
   <div class="card-body">
     <div class="card-title"></div>
-    <form (ngSubmit)="submitFormCadastro()" [formGroup]="cadastroForm">
+    <form (submit)="submitFormCadastro()" [formGroup]="cadastroForm" class="needs-validation" >
       <div class="form-group">
-        <input
-          type="email"
-          class="form-control"
-          formControlName="email"
-          placeholder="E-mail"
-        >
+        <input type="email" class="form-control" id="validationCustom03"
+        formControlName="email"
+        placeholder="E-mail" required>
+        <div class="p-2" *ngIf="cadastroForm.get('email')?.value.length > 0 && cadastroForm.get('email')?.invalid && ( cadastroForm.get('email')?.dirty || cadastroForm.get('email')?.touched)">
+          <span class="text-danger">*E-mail inválido. </span>
+        </div>
       </div>
       <div class="form-group">
         <input
@@ -17,14 +17,19 @@
           class="form-control"
           placeholder="Nome completo"
         >
+        <div class="p-2" *ngIf="cadastroForm.get('nomeCompleto')?.value.length > 0 && cadastroForm.get('nomeCompleto')?.invalid && ( cadastroForm.get('nomeCompleto')?.dirty || cadastroForm.get('nomeCompleto')?.touched)">
+          <span class="text-danger">*O nome precisa ter entre 5 e 25 caracteres.</span>
+        </div>
       </div>
       <div class="form-group">
-        <input
-          type="text"
-          class="form-control"
-          formControlName="nomeUsuario"
-          placeholder="Nome de usuário"
-        >
+    <div class="input-group has-validation">
+      <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" class="form-control"
+      formControlName="nomeUsuario"
+      placeholder="Nome de usuário" required>
+      <div class="p-2" *ngIf="cadastroForm.get('nomeUsuario')?.value.length > 0 && cadastroForm.get('nomeUsuario')?.invalid && ( cadastroForm.get('nomeUsuario')?.dirty || cadastroForm.get('nomeUsuario')?.touched)">
+        <span class="text-danger">*O nome de usuário só pode ter no máximo 15 caracteres.</span>
+      </div>
+    </div>
       </div>
       <div class="form-group">
         <input
@@ -33,8 +38,11 @@
           class="form-control"
           placeholder="Senha"
         >
+        <div class="p-2" *ngIf="cadastroForm.get('senha')?.value.length > 0 && cadastroForm.get('senha')?.invalid && ( cadastroForm.get('senha')?.dirty || cadastroForm.get('senha')?.touched)">
+          <span class="text-danger">*A senha precisa ter entre 5 e 15 caracteres.</span>
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary btn-sm btn-block">Cadastre-se</button>
+      <button type="submit" [disabled]="cadastroForm.invalid" class="btn btn-primary btn-sm btn-block">Cadastre-se</button>
     </form>
     <hr />
 
@@ -43,7 +51,7 @@
   </div>
 </div>
 <br />
-<div class="card" style="width: 20rem;">
+<div class="card shadow" style="width: 20rem;">
   <div class="card-body">
     <p class="card-text">
       Tem uma conta? <a (click)="irLogar()" href="#" class="card-link">Faça login</a>

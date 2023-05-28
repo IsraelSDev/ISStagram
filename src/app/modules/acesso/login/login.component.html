@@ -1,4 +1,4 @@
-<div class="card" style="width: 20rem; margin: 2rem 0;">
+<div class="card shadow" style="width: 20rem; margin: 2rem 0;">
   <div class="card-body">
     <div class="card-title"></div>
 
@@ -10,6 +10,9 @@
           class="form-control"
           placeholder="E-mail"
           >
+          <div class="p-2" *ngIf="formLogin.get('email')?.value.length > 0 && formLogin.get('email')?.invalid && ( formLogin.get('email')?.dirty || formLogin.get('email')?.touched)">
+            <span class="text-danger">*E-mail inválido. </span>
+          </div>
         </div>
         <div class="form-group">
           <input
@@ -19,16 +22,16 @@
           placeholder="Senha"
         >
       </div>
-      <button type="submit" class="btn btn-primary btn-sm btn-block">Entrar</button>
+      <button type="submit" [disabled]="formLogin.invalid" class="btn btn-primary btn-sm btn-block">Entrar</button>
     </form>
     <hr />
 
-    <p class="small text-danger text-center">O nome de usuário inserido não pertence a uma conta. Verifique seu nome de usuário e tente novamente.</p>
+    <p class="small text-danger text-center">O e-mail inserido não pertence a uma conta. Verifique seu e-mail e tente novamente.</p>
 
   </div>
 </div>
 <br />
-<div class="card" style="width: 20rem;">
+<div class="card shadow" style="width: 20rem;">
   <div class="card-body">
     <p class="card-text">
       Não tem uma conta? <a href="#" class="card-link" (click)="irCadastrar()">Cadastre-se</a>

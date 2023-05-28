@@ -19,9 +19,9 @@ export class CadastroComponent implements OnInit {
   ) {
     this.cadastroForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      nomeCompleto: new FormControl('', [Validators.required,]),
-      nomeUsuario: new FormControl('', [Validators.required]),
-      senha: new FormControl('', [Validators.required])
+      nomeCompleto: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(25)]),
+      nomeUsuario: new FormControl('', [Validators.required, Validators.maxLength(15)]),
+      senha: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(15)])
     })
   }
 
@@ -36,7 +36,7 @@ export class CadastroComponent implements OnInit {
       senha: this.cadastroForm.value.senha
     }
 
-    this.authService.cadastrarUsuario(usuario);
+    // this.authService.cadastrarUsuario(usuario);
   }
 
   irLogar() {
