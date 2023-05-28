@@ -29,6 +29,22 @@ import { Component, OnInit } from '@angular/core';
         }),
         animate('500ms 200ms ease-in-out')
       ])
+    ]),
+
+    trigger('virarCard', [
+      transition('back <=> front', [
+        animate('1s 0s ease-in',
+          keyframes([
+            style({
+              transform: 'perspective(400px) rotateY(-180deg)',
+              offset: 0
+            }),
+            style({
+              transform: 'perspective(800px) rotateY(0deg)',
+              offset: 0.5
+            }),
+          ]))
+      ])
     ])
   ]
 
@@ -36,6 +52,7 @@ import { Component, OnInit } from '@angular/core';
 export class AcessoComponent implements OnInit {
 
   animCarregado: string = 'carregado';
+  backFront: string = 'back';
   isLogin = true;
 
 
@@ -45,6 +62,7 @@ export class AcessoComponent implements OnInit {
   }
 
   irCadastro(event: any) {
+    this.backFront === 'back' ? this.backFront = 'front' : this.backFront = 'back';
     this.isLogin = !this.isLogin;
   }
 

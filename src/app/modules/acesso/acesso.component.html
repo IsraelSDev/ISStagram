@@ -4,15 +4,13 @@
       <app-banner [@loadBanner]="animCarregado"></app-banner>
     </div>
 
-    <div class="col-sm-6 d-flex justify-content-start">
-
-
-      <app-login *ngIf="isLogin; else cadastro" [@loadSecondCol]="animCarregado" (irCadastro)='irCadastro($event)'></app-login>
-
-      <ng-template #cadastro>
-        <app-cadastro (irLogin)='irCadastro($event)' [@loadSecondCol]="animCarregado"></app-cadastro>
-      </ng-template>
-
+    <div class="col-sm-6 d-flex justify-content-start"  [@loadSecondCol]="animCarregado">
+      <div [@virarCard]="backFront">
+        <app-login *ngIf="isLogin; else cadastro" (irCadastro)='irCadastro($event)'></app-login>
+        <ng-template #cadastro >
+          <app-cadastro (irLogin)='irCadastro($event)' ></app-cadastro>
+        </ng-template>
+      </div>
     </div>
   </div>
 </div>
